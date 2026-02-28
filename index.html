@@ -586,6 +586,218 @@
       to { opacity: 1; transform: translateX(0); }
     }
 
+    /* ── FLEET INVENTORY ── */
+    .fleet-section {
+      padding: 100px 60px;
+      background: var(--black);
+    }
+
+    .fleet-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* Fleet Table */
+    .fleet-table-wrap {
+      overflow-x: auto;
+    }
+
+    .fleet-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Barlow Condensed', sans-serif;
+    }
+
+    .fleet-table thead tr {
+      background: var(--yellow);
+    }
+
+    .fleet-table thead th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
+      padding: 14px 20px;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .fleet-table tbody tr {
+      border-bottom: 1px solid #222;
+      transition: background 0.2s;
+    }
+
+    .fleet-table tbody tr:hover {
+      background: var(--steel);
+    }
+
+    .fleet-table tbody td {
+      padding: 16px 20px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--light);
+    }
+
+    .fleet-table tbody td:first-child {
+      color: var(--white);
+      font-size: 1.05rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #1a3a1a;
+      background: #b6f5b6;
+      padding: 4px 12px;
+    }
+
+    .status-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #1a7a1a;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* Fleet Carousel */
+    .fleet-carousel {
+      position: sticky;
+      top: 84px;
+    }
+
+    .carousel-viewport {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--steel);
+      overflow: hidden;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-slide .no-img {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: #444;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 20px;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-slide .no-img svg {
+      opacity: 0.25;
+    }
+
+    .carousel-counter {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(0,0,0,0.7);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      color: var(--light);
+      padding: 5px 12px;
+      z-index: 2;
+    }
+
+    .carousel-controls {
+      display: flex;
+      gap: 2px;
+      margin-top: 2px;
+    }
+
+    .carousel-btn {
+      flex: 1;
+      background: var(--steel);
+      border: none;
+      color: var(--white);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      padding: 14px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.05em;
+    }
+
+    .carousel-btn:hover {
+      background: var(--yellow);
+      color: var(--black);
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+      padding: 14px 0 0;
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      background: #333;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .carousel-dot.active {
+      background: var(--yellow);
+      transform: scaleX(2.5);
+    }
+
+    .carousel-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #555;
+      text-align: center;
+      padding-top: 10px;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 900px) {
       .hero { padding: 100px 32px 60px; align-items: center; }
@@ -599,6 +811,9 @@
       footer { flex-direction: column; align-items: flex-start; padding: 32px; }
       nav { padding: 0 24px; }
       .nav-links { display: none; }
+      .fleet-section { padding: 70px 32px; }
+      .fleet-inner { grid-template-columns: 1fr; gap: 40px; }
+      .fleet-carousel { position: static; }
     }
   </style>
 </head>
@@ -610,6 +825,7 @@
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#fleet">Fleet</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
@@ -804,6 +1020,219 @@
 
   <div class="divider-stripe"></div>
 
+  <!-- FLEET INVENTORY -->
+  <section class="fleet-section" id="fleet">
+    <div class="section-label">Our Equipment</div>
+    <h2 class="section-title">Fleet Inventory</h2>
+
+    <div class="fleet-inner">
+
+      <!-- Table -->
+      <div class="fleet-table-wrap">
+        <table class="fleet-table">
+          <thead>
+            <tr>
+              <th>Year / Make / Model</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2019 Volvo VHD64F200</td>
+              <td><span class="status-badge">Active</span></td>
+            </tr>
+            <tr>
+              <td>2019 Kenworth T880</td>
+              <td><span class="status-badge">Active</span></td>
+            </tr>
+            <tr>
+              <td>2019 Kenworth W900B</td>
+              <td><span class="status-badge">Active</span></td>
+            </tr>
+            <tr>
+              <td>2016 Kenworth T880</td>
+              <td><span class="status-badge">Active</span></td>
+            </tr>
+            <tr>
+              <td>2018 Volvo VHD64B300</td>
+              <td><span class="status-badge">Active</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Carousel -->
+      <div class="fleet-carousel">
+        <div class="carousel-viewport" id="carouselViewport">
+          <div class="carousel-counter"><span id="carouselCurrent">1</span> / <span id="carouselTotal">—</span></div>
+          <!-- Slides injected by JS -->
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="prevBtn" onclick="carouselMove(-1)">&#8592; Prev</button>
+          <button class="carousel-btn" id="nextBtn" onclick="carouselMove(1)">Next &#8594;</button>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <p class="carousel-label" id="carouselLabel">Fleet Photos</p>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    (function() {
+      // ── Configuration ──────────────────────────────────────────
+      // The carousel scans /images/fleet/ for files named with common
+      // patterns. Add or remove filenames here to match your actual files.
+      // Supported extensions: .jpg, .jpeg, .png (case-insensitive).
+      // The script will silently skip any image that fails to load.
+      const FLEET_IMAGE_DIR = '/images/fleet/';
+
+      // Probe a list of candidate filenames; any that load successfully
+      // will be added to the carousel automatically.
+      const CANDIDATE_FILENAMES = [
+        'truck1.jpg','truck2.jpg','truck3.jpg','truck4.jpg','truck5.jpg',
+        'truck1.jpeg','truck2.jpeg','truck3.jpeg','truck4.jpeg','truck5.jpeg',
+        'truck1.png','truck2.png','truck3.png','truck4.png','truck5.png',
+        'fleet1.jpg','fleet2.jpg','fleet3.jpg','fleet4.jpg','fleet5.jpg',
+        'fleet1.jpeg','fleet2.jpeg','fleet3.jpeg','fleet4.jpeg','fleet5.jpeg',
+        'fleet1.png','fleet2.png','fleet3.png','fleet4.png','fleet5.png',
+        '1.jpg','2.jpg','3.jpg','4.jpg','5.jpg',
+        '1.png','2.png','3.png','4.png','5.png',
+        'volvo_vhd64f200.jpg','kenworth_t880.jpg','kenworth_w900b.jpg','volvo_vhd64b300.jpg',
+        'volvo_vhd64f200.png','kenworth_t880.png','kenworth_w900b.png','volvo_vhd64b300.png',
+      ];
+      // ── End Configuration ──────────────────────────────────────
+
+      const viewport   = document.getElementById('carouselViewport');
+      const dotsWrap   = document.getElementById('carouselDots');
+      const currentEl  = document.getElementById('carouselCurrent');
+      const totalEl    = document.getElementById('carouselTotal');
+      const labelEl    = document.getElementById('carouselLabel');
+
+      let slides = [];
+      let dots   = [];
+      let active = 0;
+
+      function buildPlaceholder() {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide active';
+        slide.innerHTML = `
+          <div class="no-img">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="18" width="56" height="32" rx="3" stroke="#888" stroke-width="2"/>
+              <circle cx="16" cy="50" r="6" stroke="#888" stroke-width="2"/>
+              <circle cx="48" cy="50" r="6" stroke="#888" stroke-width="2"/>
+              <rect x="4" y="26" width="20" height="12" rx="2" stroke="#888" stroke-width="2"/>
+              <path d="M24 30 L36 18 L56 18 L56 30Z" stroke="#888" stroke-width="2"/>
+            </svg>
+            <span>Add photos to<br>/images/fleet/</span>
+          </div>`;
+        return slide;
+      }
+
+      function goTo(index) {
+        slides[active].classList.remove('active');
+        dots[active] && dots[active].classList.remove('active');
+        active = (index + slides.length) % slides.length;
+        slides[active].classList.add('active');
+        dots[active] && dots[active].classList.add('active');
+        currentEl.textContent = active + 1;
+        if (labelEl && slides[active].dataset.filename) {
+          labelEl.textContent = slides[active].dataset.filename;
+        }
+      }
+
+      window.carouselMove = function(dir) { goTo(active + dir); };
+
+      function initCarousel(urls) {
+        // Clear placeholder
+        viewport.querySelectorAll('.carousel-slide').forEach(el => el.remove());
+        dotsWrap.innerHTML = '';
+        slides = [];
+        dots   = [];
+
+        if (urls.length === 0) {
+          const ph = buildPlaceholder();
+          viewport.appendChild(ph);
+          slides.push(ph);
+          totalEl.textContent = '1';
+          currentEl.textContent = '1';
+          labelEl.textContent = 'Add photos to /images/fleet/';
+          return;
+        }
+
+        urls.forEach((url, i) => {
+          const slide = document.createElement('div');
+          slide.className = 'carousel-slide' + (i === 0 ? ' active' : '');
+          slide.dataset.filename = url.split('/').pop();
+          const img = document.createElement('img');
+          img.src = url;
+          img.alt = 'Fleet truck photo ' + (i + 1);
+          img.loading = 'lazy';
+          slide.appendChild(img);
+          viewport.appendChild(slide);
+          slides.push(slide);
+
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+          dot.addEventListener('click', () => goTo(i));
+          dotsWrap.appendChild(dot);
+          dots.push(dot);
+        });
+
+        totalEl.textContent = urls.length;
+        currentEl.textContent = '1';
+        if (slides[0]) labelEl.textContent = slides[0].dataset.filename;
+      }
+
+      // Probe all candidates; collect ones that load
+      function probeImages(candidates, dir) {
+        const results = [];
+        let pending = candidates.length;
+        if (pending === 0) { initCarousel([]); return; }
+
+        // Insert placeholder while probing
+        const ph = buildPlaceholder();
+        viewport.appendChild(ph);
+
+        candidates.forEach(function(filename) {
+          const img = new Image();
+          const url = dir + filename;
+          img.onload = function() {
+            results.push({ url, filename });
+            if (--pending === 0) finish();
+          };
+          img.onerror = function() {
+            if (--pending === 0) finish();
+          };
+          img.src = url;
+        });
+
+        function finish() {
+          // Sort by filename for consistent ordering
+          results.sort((a, b) => a.filename.localeCompare(b.filename));
+          initCarousel(results.map(r => r.url));
+        }
+      }
+
+      probeImages(CANDIDATE_FILENAMES, FLEET_IMAGE_DIR);
+
+      // Keyboard navigation
+      document.addEventListener('keydown', function(e) {
+        const fs = document.getElementById('fleet');
+        if (!fs) return;
+        const rect = fs.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          if (e.key === 'ArrowLeft')  window.carouselMove(-1);
+          if (e.key === 'ArrowRight') window.carouselMove(1);
+        }
+      });
+    })();
+  </script>
+
+  <div class="divider-stripe"></div>
+
   <!-- CONTACT -->
   <section class="contact-section" id="contact">
     <div class="contact-grid">
@@ -823,7 +1252,7 @@
           <div class="contact-detail-icon">✉️</div>
           <div class="contact-detail-text">
             <strong>Email</strong>
-            <span>dispatch@economax.llc</span>
+            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1074796360716473785075737f7e7f7d71683e7c7c73">[email&#160;protected]</a></span>
           </div>
         </div>
         <div class="contact-detail">
@@ -906,11 +1335,6 @@
     <ul class="footer-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#fleet">Fleet</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="#">Privacy Policy</a></li>
-    </ul>
-    <div class="footer-copy">© 2026 EconoMax, LLC. All rights reserved.</div>
-  </footer>
-
-</body>
-</html>
+      <li><a href="#">Privacy Policy</a>
